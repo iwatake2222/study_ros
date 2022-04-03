@@ -40,26 +40,17 @@ RUN cd ~/ros2_ws/src \
 && git clone -b eloquent https://github.com/ros2/examples ros2_examples
 
 RUN cd ~/ros2_ws \
-&& wget https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/ros2/turtlebot3.repos && vcs import src < turtlebot3.repos
+&& wget https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/eloquent-devel/turtlebot3.repos && vcs import src < turtlebot3.repos
 
 RUN set -x
 RUN echo "export ROS_DOMAIN_ID=30 #TURTLEBOT3" >> ~/.bashrc
 RUN echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ros2_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models" >> ~/.bashrc
 RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 
-ADD ./tutrials/ ./ros2_ws/src/
+# ADD ./tutrials/ ./ros2_ws/src/
 
 RUN cd ~/ros2_ws/src \
 && ln -s ~/myProjects .
-
-RUN cd ~/ros2_ws/src/utils \
-&& rm -r hls_lfcd_lds_driver \
-&& git clone -b eloquent-devel https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver.git
-
-RUN cd ~/ros2_ws/src \
-&& rm -r turtlebot3 \
-&& git clone -b eloquent-devel https://github.com/ROBOTIS-GIT/turtlebot3.git \
-&& git clone -b eloquent-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
 
 RUN set -x
 RUN cd ~/ros2_ws \
