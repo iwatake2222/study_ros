@@ -74,3 +74,23 @@ ros2 action send_goal --feedback /turtle1/rotate_absolute turtlesim/action/Rotat
 ```sh
 ros2 launch ./myProjects/my_turtlesim.launch.py
 ```
+
+
+
+# Chapter 8
+```sh
+ros2 run examples_rclpy_minimal_publisher publisher_local_function
+ros2 run examples_rclpy_minimal_subscriber subscriber_lambda
+```
+
+```sh
+cd ~/ros2_ws/src/myProjects
+ros2 pkg create your_turtle_pkg --dependencies rclcpy --build-type ament_python
+cd ~/ros2_ws
+colcon build --packages-select your_turtle_pkg
+source ~/ros2_ws/install/setup.bash
+
+ros2 run your_turtle_pkg move
+ros2 run your_turtle_pkg spawn
+
+```
