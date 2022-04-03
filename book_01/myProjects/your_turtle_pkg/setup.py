@@ -22,6 +22,8 @@ setup(
         'console_scripts': [
             'move=your_turtle_pkg.moveTurtle:main',
             'spawn=your_turtle_pkg.spawnTurtle:main',
+            'bg_param=your_turtle_pkg.bg_paramTurtle:main',
+            'rotate=your_turtle_pkg.rotateTurtle:main',
         ],
     },
 )

@@ -92,5 +92,7 @@ source ~/ros2_ws/install/setup.bash
 
 ros2 run your_turtle_pkg move
 ros2 run your_turtle_pkg spawn
+ros2 run your_turtle_pkg bg_param
+ros2 run your_turtle_pkg rotate
 
 ```

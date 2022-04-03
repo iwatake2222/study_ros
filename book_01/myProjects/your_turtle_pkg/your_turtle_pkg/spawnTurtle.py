@@ -16,7 +16,7 @@ def main(args=None):
         node.get_logger().info("service not available, waiting again...")
     
     future = client.call_async(req)
-    rclpy.spin_util_future_complete(node, future)
+    rclpy.spin_until_future_complete(node, future)
     try:
         result = future.result()
     except Exception as e:
