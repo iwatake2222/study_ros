@@ -94,5 +94,20 @@ ros2 run your_turtle_pkg move
 ros2 run your_turtle_pkg spawn
 ros2 run your_turtle_pkg bg_param
 ros2 run your_turtle_pkg rotate
+```
 
+# Chapter 9
+```sh
+env | grep TURTLEBOT3
+ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
+ros2 run turtlebot3_teleop teleop_keyboard
+ros2 launch turtlebot3_cartographer cartographer.launch.py
+ros2 run nav2_map_server map_saver -f ~/myProjects/2Dmap
+```
+
+```sh
+cd ~/ros2_ws
+colcon build --packages-select your_turtle_pkg
+source ~/ros2_ws/install/setup.bash
+ros2 run your_turtle_pkg mvTB3
 ```

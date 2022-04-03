@@ -24,6 +24,7 @@ setup(
             'spawn=your_turtle_pkg.spawnTurtle:main',
             'bg_param=your_turtle_pkg.bg_paramTurtle:main',
             'rotate=your_turtle_pkg.rotateTurtle:main',
+            'mvTB3=your_turtle_pkg.mvTB3:main',
         ],
     },
 )
