@@ -1,0 +1,37 @@
+# Setup
+- https://docs.docker.com/engine/install/ubuntu/
+- `sudo gpasswd -a iwatake docker`
+- `docker run -it --name foxytest1 --net=host -v /dev:/dev --privileged ros:foxy`
+
+# microcontroller
+```sh
+docker run -it --name es32freertos --net=host -v /dev:/dev -v /home/iwatake/iwatake/devel/study_ros/:/study_ros --privileged ros:foxy
+cd /study_ros/book_02/
+mkdir -p esp32freertos_ws/src
+git submodule add -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git esp32freertos_ws/src/micro_ros_setup
+
+cd esp32freertos_ws
+sudo apt update && rosdep update
+rosdep install --from-path src/ --ignore-src -y
+sudo apt install python3-pip
+colcon build
+source install/local_setup.bash
+
+ros2 run micro_ros_setup create_firmware_ws.sh freertos esp32
+
+ros2 run micro_ros_setup configure_firmware.sh int32_publisher -t udp -i 192.168.1.13 -p 8888
+# Modify WiFi Configuration
+ros2 run micro_ros_setup build_firmware.sh menuconfig
+ros2 ros micro_ros_setup build_firmware.sh
+ros2 run micro_ros_setup flash_firmware.sh
+
+ros2 run micro_ros_setup create_agent_ws.sh
+ros2 run micro_ros_setup build_agent.sh
+source install/local_setup.bash
+ros2 run micor_ros_agent micro_ros_agent udp4 --port 8888
+# docker run -it --rm --net=host microros/micro-ros-agent:foxy udp4 --port 8888 -v6
+
+ros2 run micro_ros_setup build_firmware.sh monitor
+ros2 topic list
+```
+
