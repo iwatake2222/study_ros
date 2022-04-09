@@ -1,11 +1,16 @@
 # Setup
 - https://docs.docker.com/engine/install/ubuntu/
-- `sudo gpasswd -a iwatake docker`
-- `docker run -it --rm --name foxytest1 --net=host -v /dev:/dev --privileged ros:foxy`
+
+```sh
+sudo gpasswd -a iwatake docker
+xhost local:
+docker run -it --rm --name foxytest1 -e DISPLAY=$DISPLAY --net=host -v /dev:/dev --privileged ros:foxy
+```
 
 # Test by console command
 ```sh
-docker run -it --rm --name foxytest1 --net=host -v /dev:/dev -v /home/iwatake/iwatake/devel/study_ros/:/study_ros --privileged ros:foxy
+xhost local:
+docker run -it --rm --name foxytest1 -e DISPLAY=$DISPLAY --net=host -v /dev:/dev -v /home/iwatake/iwatake/devel/study_ros/:/study_ros --privileged ros:foxy
 docker exec -it foxytest1 /ros_entrypoint.sh bash
 ros2 topic pub /chatter std_msgs/String "data: Hello World"
 ros2 topic echo /chatter
