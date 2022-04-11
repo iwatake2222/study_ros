@@ -2,5 +2,6 @@
     // "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
     "files.associations": {
         "executor.h": "c"
-    }
+    },
+    "cmake.configureOnOpen": false
 }

@@ -1,5 +1,7 @@
 build/
 install/
+devel/
+share/
 log/
 
 # Byte-compiled / optimized / DLL files
