@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ros_tutorials_topic</name>
+  <name>ros_tutorials_service</name>
   <version>0.1.0</version>
-  <description>The ros_tutorials_topic package</description>
+  <description>The ros_tutorials_service package</description>
   <maintainer email="iwatake@todo.todo">iwatake</maintainer>
   <license>Apache License 2.0</license>
   <buildtool_depend>catkin</buildtool_depend>
