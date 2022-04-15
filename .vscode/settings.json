@@ -1,8 +1,0 @@
-{
-    // "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
-    "files.associations": {
-        "executor.h": "c",
-        "functional": "cpp"
-    },
-    "cmake.configureOnOpen": false
-}

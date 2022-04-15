@@ -3,11 +3,12 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/book_03/catkin_ws/devel/include",
-                "/opt/ros/foxy/include/"
+                "${workspaceFolder}/**"
+                // "${workspaceFolder}/book_03/catkin_ws/devel/include",
+                // "/opt/ros/foxy/include/"
                 // "/opt/ros/noetic/include/"
             ],
+            "compileCommands": "${workspaceFolder}/tutorial_01/dev_ws/build/compile_commands.json",
             "defines": [],
             "compilerPath": "/usr/bin/clang-10",
             "cStandard": "c11",

@@ -16,6 +16,9 @@ public:
   MinimalPublisher()
   : Node("minimal_publisher"), count_(0)
   {
+    /* Parameter */
+    this->declare_parameter<std::string>("my_parameter", "world");
+
     /* Topic: Publisher */
     publisher_1_ = this->create_publisher<std_msgs::msg::String>("topic_1", 10);
     publisher_2_ = this->create_publisher<tutorial_interfaces::msg::Num>("topic_2", 10);
@@ -29,6 +32,9 @@ public:
 private:
   void timer_callback()
   {
+    this->get_parameter("my_parameter", parameter_string_);
+    RCLCPP_INFO(this->get_logger(), "Hello %s", parameter_string_.c_str());
+
     auto msg1 = std_msgs::msg::String();
     msg1.data = "Hello, world! " + std::to_string(count_++);
     RCLCPP_INFO(this->get_logger(), "Publishing_1: '%s'", msg1.data.c_str());
@@ -58,6 +64,7 @@ private:
 
 private:
   rclcpp::TimerBase::SharedPtr timer_;
+  std::string parameter_string_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_1_;
   rclcpp::Publisher<tutorial_interfaces::msg::Num>::SharedPtr publisher_2_;
   rclcpp::Service<example_interfaces::srv::AddTwoInts>::SharedPtr service_1_;

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(cpp_pubsub)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 if(NOT CMAKE_C_STANDARD)
   set(CMAKE_C_STANDARD 99)
 endif()
@@ -29,5 +31,10 @@ install(TARGETS
   talker
   listener
   DESTINATION lib/${PROJECT_NAME})
+
+install(
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
 
 ament_package()
