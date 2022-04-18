@@ -7,6 +7,7 @@ ros2 run demo_nodes_cpp talker
 ros2 run demo_nodes_py listener
 ```
 
+# Coding
 ```sh
 mkdir -p dev_ws/src
 cd dev_ws/src
@@ -34,3 +35,38 @@ touch action/Fibonacci.action
 cd ../../
 ```
 
+# Development tools
+## How to automatically set IntelliSense in VSCode
+- VSCode
+    - ms-vscode.cpptools
+- Modify `CMakeLists.txt` to add
+    - `set(CMAKE_EXPORT_COMPILE_COMMANDS ON)`
+- Create `.vscode/c_cpp_properties.json` to add
+    - `"compileCommands": "${workspaceFolder}/dev_ws/build/compile_commands.json",`
+
+## How to Debug in VSCode
+- Open VSCode after doing
+    - `source /opt/ros/foxy/setup.bash`
+    - ` . install/setup.bash`
+
+- VSCode
+    - ms-iot.vscode-ros
+- Create `.vscode/launch.json` to add
+    ```json
+    {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "ROS: Launch",
+                "type": "ros",
+                "request": "launch",
+                "target": "${workspaceFolder}/dev_ws/src/my_package/launch/my_launch.py"
+            }
+        ]
+    }
+    ```
+- Build with debug info
+    ```sh
+    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug
+    ```
+- F5
