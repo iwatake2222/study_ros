@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ROS: Launch",
+            "type": "ros",
+            "request": "launch",
+            "target": "${workspaceFolder}/dev_ws/src/learning_tf2_cpp/launch/turtle_tf2_fixed_frame_demo.launch.py",
+            "externalConsole": true,
+        }
+    ]
+}
