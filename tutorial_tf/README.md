@@ -46,3 +46,9 @@ ros2 launch learning_tf2_cpp turtle_tf2_fixed_frame_demo.launch.py
 ros2 launch learning_tf2_cpp turtle_tf2_fixed_frame_demo.launch.py target_frame:=carrot1
 ros2 run tf2_tools view_frames.py
 ```
+
+```
+cp src/learning_tf2_cpp/src/turtle_tf2_listener.cpp src/learning_tf2_cpp/src/turtle_tf2_listener_debug.cpp
+touch src/learning_tf2_cpp/launch/start_tf2_debug_demo.launch.py
+ros2 launch learning_tf2_cpp start_tf2_debug_demo.launch.py
+```
