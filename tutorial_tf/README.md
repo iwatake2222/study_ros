@@ -47,8 +47,19 @@ ros2 launch learning_tf2_cpp turtle_tf2_fixed_frame_demo.launch.py target_frame:
 ros2 run tf2_tools view_frames.py
 ```
 
-```
+```sh
 cp src/learning_tf2_cpp/src/turtle_tf2_listener.cpp src/learning_tf2_cpp/src/turtle_tf2_listener_debug.cpp
 touch src/learning_tf2_cpp/launch/start_tf2_debug_demo.launch.py
 ros2 launch learning_tf2_cpp start_tf2_debug_demo.launch.py
+```
+
+```sh
+touch src/learning_tf2_cpp/src/turtle_tf2_message_filter.cpp
+
+ros2 run learning_tf2_cpp turtle_tf2_message_filter
+ros2 launch learning_tf2_cpp turtle_tf2_demo.launch.py
+ros2 topic pub /turtle3/turtle_point_stamped geometry_msgs/msg/PointStamped "{header: {frame_id: 'world'}, point: {x: 1, y: 2, z: 0}}"
+
+rosservice call /spawn turtlesim/srv/Spawn "{name: 'turtle3', x: 1, y: 1}"
+
 ```

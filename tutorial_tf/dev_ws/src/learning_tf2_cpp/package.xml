@@ -14,6 +14,8 @@
   <depend>tf2</depend>
   <depend>tf2_ros</depend>
   <depend>turtlesim</depend>
+  <depend>message_filters</depend>
+  <depend>tf2_geometry_msgs</depend>
 
   <exec_depend>ros2launch</exec_depend>
   <exec_depend>launch</exec_depend>
