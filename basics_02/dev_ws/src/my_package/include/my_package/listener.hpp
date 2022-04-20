@@ -1,4 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/int32.hpp"
 #include "my_package/visibility_control.h"
 
 namespace my_package

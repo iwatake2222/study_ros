@@ -23,7 +23,8 @@ find_package(std_msgs REQUIRED)
 add_library(talker SHARED src/talker.cpp)
 target_include_directories(talker PRIVATE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>)
+  $<INSTALL_INTERFACE:include>
+)
 target_compile_definitions(talker PRIVATE "MY_PACKAGE_BUILDING_DLL")
 ament_target_dependencies(talker
   "rclcpp"
@@ -35,7 +36,8 @@ rclcpp_components_register_node(talker PLUGIN "my_package::Talker" EXECUTABLE ta
 add_library(listener SHARED src/listener.cpp)
 target_include_directories(listener PRIVATE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>)
+  $<INSTALL_INTERFACE:include>
+)
 target_compile_definitions(listener PRIVATE "MY_PACKAGE_BUILDING_DLL")
 ament_target_dependencies(listener
   "rclcpp"
@@ -44,11 +46,30 @@ ament_target_dependencies(listener
 )
 rclcpp_components_register_node(listener PLUGIN "my_package::Listener" EXECUTABLE listener_exe)
 
+add_executable(manual_composition src/manual_composition.cpp)
+target_include_directories(manual_composition PRIVATE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+target_link_libraries(manual_composition
+  talker
+  listener
+)
+ament_target_dependencies(manual_composition
+  "rclcpp"
+)
+
 install(TARGETS
   talker listener
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin)
+  RUNTIME DESTINATION bin
+)
+
+install(TARGETS
+  manual_composition
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 install(
   DIRECTORY launch

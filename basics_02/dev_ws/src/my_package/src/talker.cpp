@@ -12,7 +12,7 @@
 #include <sys/syscall.h>
 static void print_pid_tid(const char * str)
 {
-  printf("[%s] pid = %ld, %d, tid = %ld\n", str, syscall(SYS_gettid), getpid(), syscall(SYS_getpid));
+  printf("[%s] pid = %ld, %d, tid = %ld\n", str, syscall(SYS_getpid), getpid(), syscall(SYS_gettid));
 }
 
 namespace my_package
