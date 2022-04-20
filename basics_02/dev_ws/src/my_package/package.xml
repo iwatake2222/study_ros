@@ -11,9 +11,7 @@
 
   <depend>rclcpp</depend>
   <depend>rclcpp_components</depend>
-  <depend>rclcpp_action</depend>
   <depend>std_msgs</depend>
-  <depend>my_interface</depend>
 
   <exec_depend>ros2launch</exec_depend>
 
