@@ -1,10 +1,26 @@
 http://docs.ros.org/en/foxy/
 
 # Setup
+## Local
 ```sh
 source /opt/ros/foxy/setup.bash
 ros2 run demo_nodes_cpp talker
 ros2 run demo_nodes_py listener
+```
+
+## Docker
+- https://docs.docker.com/engine/install/ubuntu/
+- `sudo gpasswd -a iwatake docker`
+
+```sh
+xhost local:
+docker run -it --name foxytest1 -e DISPLAY=$DISPLAY --net=host -v /dev:/dev -v /home/iwatake/devel/study_ros/:/study_ros --privileged ros:foxy
+docker start foxytest1
+docker exec -it foxytest1 /ros_entrypoint.sh bash
+
+cd /study_ros
+ros2 topic pub /chatter std_msgs/String "data: Hello World"
+ros2 topic echo /chatter
 ```
 
 # Coding
@@ -23,12 +39,7 @@ ros2 launch my_package my_launch.py
 ```
 
 ```sh
-cd src
-ros2 pkg create --build-type ament_cmake my_interface
-cd my_interface
-mkdir msg
-mkdir srv
-mkdir action
+cd src    - Install ms-vscode.cpptools, ms-python.python
 touch msg/Num.msg
 touch srv/AddThreeInts.srv
 touch action/Fibonacci.action
@@ -70,3 +81,31 @@ cd ../../
     colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug
     ```
 - F5
+
+
+# Development tools for Docker
+- Open `code` in local
+- Remote Explorer -> Containers -> ros:foxy foxytest1 -> Open `/study_ros/basics_01`
+    - Install ms-vscode.cpptools, ms-python.python
+- Enable Python IntelliSense in VSCode
+    - `.vscode/settings.json`
+
+    ```json:.vscode/settings.json
+    {
+        "python.autoComplete.extraPaths": [
+            "/opt/ros/foxy/lib/python3.8/site-packages/"
+        ],
+        "python.analysis.extraPaths": [
+            "/opt/ros/foxy/lib/python3.8/site-packages/"
+        ],
+    }
+    ```
+- Enable C++ IntelliSense in VSCode
+    - See above
+- How to debug C++
+    - Install GDB
+    - File -> Preferences -> Settings -> Ros
+        - `Ros: Distro` = `/opt/ros/foxy`
+        - `Ros: Ros Setup Script` = `/study_ros/basics_01/dev_ws/install/setup.bash`
+    - F5
+
