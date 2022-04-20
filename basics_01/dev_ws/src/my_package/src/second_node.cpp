@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "rclcpp/rclcpp.hpp"
+#include "rclcpp/subscription_options.hpp"
 #include "std_msgs/msg/string.hpp"
 
 #include "my_package/second_node.hpp"
@@ -14,7 +15,14 @@ SecondNode::SecondNode(const rclcpp::NodeOptions & options)
 : Node("second_node", options)
 {
   /* Topic: Subscriber */
+#if 1
+  auto subscription_options = rclcpp::SubscriptionOptions();
+  subscription_options.topic_stats_options.state = rclcpp::TopicStatisticsState::Enable;
+  subscription_options.topic_stats_options.publish_period = std::chrono::seconds(10);
+  subscription_1_ = this->create_subscription<std_msgs::msg::String>("my_topic_1", 10, std::bind(&SecondNode::topic_callback_1, this, std::placeholders::_1), subscription_options);
+#else
   subscription_1_ = this->create_subscription<std_msgs::msg::String>("my_topic_1", 10, std::bind(&SecondNode::topic_callback_1, this, std::placeholders::_1));
+#endif
   subscription_2_ = this->create_subscription<my_interface::msg::Num>("my_topic_2", 10, std::bind(&SecondNode::topic_callback_2, this, std::placeholders::_1));
 
   /* Service: Client */
